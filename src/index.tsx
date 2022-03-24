@@ -7,11 +7,11 @@ import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const token = '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';
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
   headers: {
-    authorization: `Bearer ${token}`,
+    credentials: true,
+    authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
   },
 });
 
