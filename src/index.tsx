@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import './styles/index.css';
+import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const token = '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';
+const httpLink = createHttpLink({
+  uri: 'https://api.github.com/graphql',
+  headers: {
+    authorization: `Bearer ${token}`,
+  },
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ApolloProvider>
+  </StrictMode>,
   document.getElementById('root')
 );
 
