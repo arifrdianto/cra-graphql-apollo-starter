@@ -9,8 +9,8 @@ import reportWebVitals from './reportWebVitals';
 
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',
+  credentials: 'include',
   headers: {
-    credentials: true,
     authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
   },
 });
